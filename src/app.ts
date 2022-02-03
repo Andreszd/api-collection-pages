@@ -1,8 +1,5 @@
-import express from 'express';
+import { app } from './server';
+import { testConnection } from './config/db';
 
-const app = express();
-
-app.listen(4000, () => {
-  console.log('Application started on port 4000');
-  console.log('using typescript');
-});
+testConnection();
+app.mount();
