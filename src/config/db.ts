@@ -11,13 +11,4 @@ const sequelizeConnection = new Sequelize(dbName, dbUser, dbPassword, {
   dialect: dbDriver,
 });
 
-export async function testConnection(): Promise<void> {
-  try {
-    await sequelizeConnection.authenticate();
-    console.log('connection to db succesfully');
-  } catch (error) {
-    console.error('Unable to connect to the database', error);
-  }
-}
-
 export default sequelizeConnection;

@@ -1,5 +1,6 @@
 import { app } from './server';
-import { testConnection } from './config/db';
+import { initModels, testConnection } from './db/init';
 
-testConnection();
 app.mount();
+testConnection();
+initModels();
