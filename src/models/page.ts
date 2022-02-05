@@ -2,6 +2,8 @@ import { Optional, Model, DataTypes } from 'sequelize';
 import { getDefaultModelBaseOpt, ModelBase } from './modelBase';
 
 interface PageAttributes extends ModelBase {
+  ownerIdGroup?: number;
+  ownerIdUser: number;
   url: string;
   isFav: boolean;
   isChecked: boolean;
@@ -10,13 +12,15 @@ interface PageAttributes extends ModelBase {
 }
 
 interface PageCreationAttributes
-  extends Optional<PageAttributes, 'description' | 'title'> {}
+  extends Optional<PageAttributes, 'description' | 'title' | 'ownerIdGroup'> {}
 
 class Page
   extends Model<PageAttributes, PageCreationAttributes>
   implements PageAttributes
 {
   id!: number;
+  ownerIdUser!: number;
+  ownerIdGroup?: number;
   url!: string;
   isFav!: boolean;
   isChecked!: boolean;
@@ -32,6 +36,13 @@ const initAttr = {
     type: DataTypes.INTEGER.UNSIGNED,
     autoIncrement: true,
     primaryKey: true,
+  },
+  ownerIdUser: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+  },
+  ownerIdGroup: {
+    type: DataTypes.INTEGER.UNSIGNED,
   },
   url: {
     type: new DataTypes.STRING(128),

@@ -1,16 +1,20 @@
-import { Model, Optional, DataTypes } from 'sequelize';
-import { getDefaultModelBaseOpt } from './modelBase';
+import {
+  Model,
+  Optional,
+  DataTypes,
+  HasManyGetAssociationsMixin,
+  Association,
+} from 'sequelize';
+import { ModelBase, getDefaultModelBaseOpt } from './modelBase';
+import Group from './group';
+import Page from './page';
 
-interface UserAttributes {
-  id: number;
+interface UserAttributes extends ModelBase {
   userName: string;
   firstName: string;
   lastName: string;
   password: string;
   urlImg?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'urlImg'> {}
@@ -29,6 +33,17 @@ class User
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
   public readonly deletedAt!: Date;
+
+  public getGroups!: HasManyGetAssociationsMixin<Group>;
+  public getPages!: HasManyGetAssociationsMixin<Page>;
+
+  readonly groups?: Group[];
+  readonly pages?: Page[];
+
+  static associations: {
+    groups: Association<User, Group>;
+    pages: Association<User, Page>;
+  };
 }
 
 const initAttr = {
@@ -61,5 +76,17 @@ const initAttr = {
 };
 
 User.init(initAttr, getDefaultModelBaseOpt());
+
+User.hasMany(Group, {
+  sourceKey: 'id',
+  foreignKey: 'ownerId',
+  as: 'groups',
+});
+
+User.hasMany(Page, {
+  sourceKey: 'id',
+  foreignKey: 'ownerIdUser',
+  as: 'pages',
+});
 
 export default User;

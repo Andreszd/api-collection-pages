@@ -14,9 +14,9 @@ export async function testConnection(): Promise<void> {
 export function initModels(): void {
   const isDev = process.env.NODE_ENV === 'development';
   try {
+    Group.sync({ alter: isDev });
     User.sync({ alter: isDev });
     Page.sync({ alter: isDev });
-    Group.sync({ alter: isDev });
     console.log('models created');
   } catch (error) {
     console.log('has ocurred a exception', error);
