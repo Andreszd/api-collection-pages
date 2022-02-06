@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
-    "dev": "NODE_ENV=development nodemon  ./src/app.ts"
+    "dev": "NODE_ENV=development nodemon  ./src/app.ts",
+    "test": "NODE_ENV=test jest --verbose"
   },
   "keywords": [],
   "author": "jose andres",
@@ -36,6 +36,9 @@
       "/node_modules/",
       "/test/",
       "/dist/"
+    ],
+    "setupFiles": [
+      "dotenv/config"
     ]
   }
 }

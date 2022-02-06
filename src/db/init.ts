@@ -3,12 +3,14 @@ import sequelizeConnection from '../config/db';
 import Page from '../models/page';
 import Group from '../models/group';
 
-export async function testConnection(): Promise<void> {
+export async function testConnection(): Promise<String> {
   try {
     await sequelizeConnection.authenticate();
-    console.log('connection to db succesfully');
+    console.log('>>>>> succesfully');
+    return 'connection to db succesfully';
   } catch (error) {
     console.error('Unable to connect to the database', error);
+    return 'Unable to connect to the database';
   }
 }
 export function initModels(): void {

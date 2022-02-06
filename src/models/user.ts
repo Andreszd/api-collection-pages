@@ -17,7 +17,8 @@ interface UserAttributes extends ModelBase {
   urlImg?: string;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'urlImg'> {}
+interface UserCreationAttributes
+  extends Optional<UserAttributes, 'id' | 'urlImg'> {}
 
 class User
   extends Model<UserAttributes, UserCreationAttributes>
