@@ -5,9 +5,11 @@ import {
   HasManyGetAssociationsMixin,
   Association,
 } from 'sequelize';
+
 import { ModelBase, getDefaultModelBaseOpt } from './modelBase';
 import Group from './group';
 import Page from './page';
+import { encryptPasswd } from '../helpers/encryptPasswd';
 
 interface UserAttributes extends ModelBase {
   userName: string;
@@ -75,6 +77,11 @@ const initAttr = {
     allowNull: true,
   },
 };
+
+User.beforeCreate(async (user, _) => {
+  const hashedPasswd = encryptPasswd(user.password);
+  user.password = hashedPasswd;
+});
 
 User.init(initAttr, getDefaultModelBaseOpt());
 
