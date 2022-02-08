@@ -78,11 +78,6 @@ const initAttr = {
   },
 };
 
-User.beforeCreate(async (user, _) => {
-  const hashedPasswd = encryptPasswd(user.password);
-  user.password = hashedPasswd;
-});
-
 User.init(initAttr, getDefaultModelBaseOpt());
 
 User.hasMany(Group, {
@@ -95,6 +90,11 @@ User.hasMany(Page, {
   sourceKey: 'id',
   foreignKey: 'ownerIdUser',
   as: 'pages',
+});
+
+User.beforeCreate(async (user, opt) => {
+  const hashedPasswd = encryptPasswd(user.password);
+  user.password = hashedPasswd;
 });
 
 export default User;

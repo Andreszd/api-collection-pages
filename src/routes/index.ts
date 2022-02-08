@@ -1,12 +1,15 @@
 import { Router } from 'express';
 
-import authRoutes from './auth.route';
-import groupRoutes from './groups.route';
-import pageRoutes from './pages.route';
+import auhtRoutes from '../services/auth/auth.route';
+import userRoutes from '../services/users/users.route';
+import pageRoutes from '../services/pages/pages.route';
+import groupRoutes from '../services/groups/groups.route';
 
-const router = Router();
+const routes = Router();
 
-router.use('/api/auth', authRoutes);
-router.use('/api/users');
-router.use('/api/groups', groupRoutes);
-router.use('/api/pages', pageRoutes);
+routes.use('/api/auth', auhtRoutes);
+routes.use('/api/user', userRoutes);
+routes.use('/api/group', groupRoutes);
+routes.use('/api/page', pageRoutes);
+
+export default routes;

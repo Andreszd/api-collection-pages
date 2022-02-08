@@ -1,4 +1,4 @@
-import sequelizeConnection from '../config/db';
+import sequelizeConnection from '../db/db.config';
 
 export interface ModelBase {
   id: number;

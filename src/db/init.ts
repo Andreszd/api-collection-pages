@@ -1,5 +1,5 @@
 import User from '../models/user';
-import sequelizeConnection from '../config/db';
+import sequelizeConnection from './db.config';
 import Page from '../models/page';
 import Group from '../models/group';
 

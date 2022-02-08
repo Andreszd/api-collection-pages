@@ -1,8 +1,6 @@
 import express, { Application } from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
-
-dotenv.config();
+import routes from './routes';
 
 class Server {
   private app: Application;
@@ -12,6 +10,7 @@ class Server {
     this.port = port;
     this.app = express();
     this.initConfig();
+    this.setRoutes();
   }
 
   private initConfig(): void {
@@ -20,9 +19,15 @@ class Server {
     this.app.use(cors());
   }
 
+  private setRoutes(): void {
+    this.app.use(routes);
+  }
+
   public mount(): void {
     try {
-      this.app.listen(this.port, () => `Server running on port ${this.port}`);
+      const port = process.env.PORT || this.port;
+      console.log('>>>', port);
+      this.app.listen(port, () => `Server running on port ${port}`);
     } catch (error: any) {
       //TODO search type required for error param
       console.log(`Error ocurred: ${error.message}`);
