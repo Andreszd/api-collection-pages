@@ -28,6 +28,8 @@ export enum HttpStatusCode {
    */
   NOT_IMPLEMENTED = 501,
 
+  NOT_FOUND = 404,
+
   /**
    * The server was acting as a gateway or proxy and received an invalid response from the upstream server.
    */

@@ -22,5 +22,7 @@ export const getAll = async () => {
 export const getById = async (id: number) => {
   return await getUserById(id);
 };
+
 export const update = () => {};
+
 export const remove = () => {};

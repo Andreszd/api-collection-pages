@@ -1,7 +1,7 @@
 import { Optional, Model, DataTypes } from 'sequelize';
 import { getDefaultModelBaseOpt, ModelBase } from './modelBase';
 
-interface PageAttributes extends ModelBase {
+export interface PageAttributes extends ModelBase {
   ownerIdGroup?: number;
   ownerIdUser: number;
   url: string;
@@ -12,7 +12,10 @@ interface PageAttributes extends ModelBase {
 }
 
 interface PageCreationAttributes
-  extends Optional<PageAttributes, 'description' | 'title' | 'ownerIdGroup'> {}
+  extends Optional<
+    PageAttributes,
+    'id' | 'description' | 'title' | 'ownerIdGroup'
+  > {}
 
 class Page
   extends Model<PageAttributes, PageCreationAttributes>
