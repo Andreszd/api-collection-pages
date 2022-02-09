@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import routes from './routes';
+import { handleErrors } from './middlewares/handleErrors';
 
 class Server {
   private app: Application;
@@ -9,11 +10,12 @@ class Server {
   public constructor(port: number) {
     this.port = port;
     this.app = express();
-    this.initConfig();
+    this.initMidlewares();
     this.setRoutes();
+    this.initHandleErrors();
   }
 
-  private initConfig(): void {
+  private initMidlewares(): void {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cors());
@@ -21,6 +23,10 @@ class Server {
 
   private setRoutes(): void {
     this.app.use(routes);
+  }
+
+  private initHandleErrors(): void {
+    this.app.use(handleErrors);
   }
 
   public mount(): void {

@@ -9,6 +9,15 @@ export const create = async (user: UserDto): Promise<User> => {
   return newUser;
 };
 
+export const findBy = async (param: string): Promise<User | null> => {
+  const user = await User.findOne({
+    where: {
+      userName: param,
+    },
+  });
+  return user;
+};
+
 export const getAll = async (): Promise<User[]> => {
   return User.findAll();
 };
