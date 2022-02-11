@@ -1,26 +1,32 @@
+import User from '../../models/user';
 import { AttributeDuplicateError } from '../../Exceptions/AttributeDuplicated';
 import { UserDto } from '../auth/dto';
 
-import {
-  create as createUser,
-  getAll as getAllUsers,
-  getById as getUserById,
-  findBy,
-} from '../users/dal';
+import * as dal from '../users/dal';
+import { getByIdOwner } from '../pages/page.service';
+import { NotFoundException } from '../../Exceptions/NotFoundException';
+import { toUserDto } from '../auth/mapper';
 
 export const create = async (user: UserDto): Promise<UserDto | null> => {
-  const findedUser = await findBy(user.email);
+  const findedUser = await dal.findBy(user.email);
   if (findedUser) throw new AttributeDuplicateError('username');
-  const createdUser = await createUser(user);
-  return createdUser;
+  return dal.create(user);
 };
 
-export const getAll = async () => {
-  return await getAllUsers();
+export const getAll = (): Promise<User[]> => {
+  return dal.getAll();
 };
 
-export const getById = async (id: number) => {
-  return await getUserById(id);
+export const getById = async (id: number): Promise<User> => {
+  return dal.getById(id);
+};
+
+export const getAllById = async (id: number): Promise<UserDto> => {
+  const [user, pages] = await Promise.all([getById(id), getByIdOwner(id)]);
+  if (!user) throw new NotFoundException('User');
+  const dtoUser = toUserDto(user);
+  dtoUser.pages = pages;
+  return dtoUser;
 };
 
 export const update = () => {};

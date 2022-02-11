@@ -20,8 +20,7 @@ export const findBy = async (
   });
   return page;
 };
-
-export const findAllBy = async (param: Filter, value: any): Promise<Page[]> => {
+export const findAllBy = async (param: string, value: any): Promise<Page[]> => {
   const pages = await Page.findAll({ where: { [param]: value } });
   return pages;
 };
@@ -44,7 +43,7 @@ export const update = async (
 };
 
 export const remove = async (id: number): Promise<void> => {
-  const page = await getById(id)
+  const page = await getById(id);
   if (!page) throw new NotFoundException('Page');
-  return page.destroy()
+  return page.destroy();
 };

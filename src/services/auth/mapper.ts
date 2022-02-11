@@ -7,4 +7,5 @@ export const toUserDto = (user: any): UserDto => ({
   lastName: user.lastName,
   password: user.password,
   urlImg: user?.urlImg,
+  pages: user?.pages,
 });

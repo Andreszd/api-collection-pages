@@ -20,8 +20,8 @@ export const getById = async (id: number): Promise<Page | null> => {
   return dal.getById(id);
 };
 
-export const getByIdOwner = (id: number): Promise<Page | null> => {
-  return dal.findBy('idOwner', id);
+export const getByIdOwner = (id: number): Promise<Page[]> => {
+  return dal.findAllBy('ownerIdUser', id);
 };
 
 export const getAllByFav = (isFav: boolean): Promise<Page[]> => {

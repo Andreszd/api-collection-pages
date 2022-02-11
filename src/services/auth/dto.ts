@@ -1,3 +1,6 @@
+import Page from '../../models/page';
 import { UserAttributes } from '../../models/user';
 
-export interface UserDto extends UserAttributes {}
+export interface UserDto extends UserAttributes {
+  pages?: Page[];
+}
