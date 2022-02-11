@@ -12,7 +12,7 @@ export const create = async (user: UserDto): Promise<User> => {
 export const findBy = async (param: string): Promise<User | null> => {
   const user = await User.findOne({
     where: {
-      userName: param,
+      email: param,
     },
   });
   return user;

@@ -9,7 +9,7 @@ import {
 } from '../users/dal';
 
 export const create = async (user: UserDto): Promise<UserDto | null> => {
-  const findedUser = await findBy(user.userName);
+  const findedUser = await findBy(user.email);
   if (findedUser) throw new AttributeDuplicateError('username');
   const createdUser = await createUser(user);
   return createdUser;

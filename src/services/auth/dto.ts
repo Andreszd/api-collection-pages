@@ -1,8 +1,3 @@
-export type UserDto = {
-  id?: number;
-  userName: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  urlImg?: string;
-};
+import { UserAttributes } from '../../models/user';
+
+export interface UserDto extends UserAttributes {}

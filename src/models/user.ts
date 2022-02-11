@@ -11,8 +11,8 @@ import Group from './group';
 import Page from './page';
 import { encryptPasswd } from '../helpers/encryptPasswd';
 
-interface UserAttributes extends ModelBase {
-  userName: string;
+export interface UserAttributes extends ModelBase {
+  email: string;
   firstName: string;
   lastName: string;
   password: string;
@@ -27,7 +27,7 @@ class User
   implements UserAttributes
 {
   public id!: number;
-  public userName!: string;
+  public email!: string;
   public firstName!: string;
   public lastName!: string;
   public password!: string;
@@ -55,7 +55,7 @@ const initAttr = {
     autoIncrement: true,
     primaryKey: true,
   },
-  userName: {
+  email: {
     type: DataTypes.STRING,
     unique: true,
     allowNull: false,

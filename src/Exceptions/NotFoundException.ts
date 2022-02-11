@@ -1,4 +1,4 @@
-import { HttpStatusCode } from 'src/enums/HttpStatusCode';
+import { HttpStatusCode } from '../enums/HttpStatusCode';
 import { BaseError } from './BaseError';
 export class NotFoundException extends BaseError {
   propertyName: string;

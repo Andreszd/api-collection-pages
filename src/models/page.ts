@@ -5,8 +5,8 @@ export interface PageAttributes extends ModelBase {
   ownerIdGroup?: number;
   ownerIdUser: number;
   url: string;
-  isFav: boolean;
-  isChecked: boolean;
+  isFav?: boolean;
+  isChecked?: boolean;
   title?: string;
   description?: string;
 }
@@ -14,7 +14,7 @@ export interface PageAttributes extends ModelBase {
 interface PageCreationAttributes
   extends Optional<
     PageAttributes,
-    'id' | 'description' | 'title' | 'ownerIdGroup'
+    'id' | 'description' | 'title' | 'ownerIdGroup' | 'isFav' | 'isChecked'
   > {}
 
 class Page
@@ -54,10 +54,12 @@ const initAttr = {
   isFav: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
+    defaultValue: false,
   },
   isChecked: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
+    defaultValue: false,
   },
   title: {
     type: new DataTypes.STRING(128),
