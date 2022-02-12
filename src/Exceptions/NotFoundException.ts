@@ -4,7 +4,7 @@ export class NotFoundException extends BaseError {
   propertyName: string;
 
   constructor(propertyName: string) {
-    super(HttpStatusCode.NOT_FOUND, `Property '${propertyName}' not found.`);
+    super(HttpStatusCode.NOT_FOUND, `'${propertyName}' Not found.`);
 
     this.propertyName = propertyName;
   }

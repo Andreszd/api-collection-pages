@@ -1,3 +1,5 @@
 import { PageAttributes } from '../../models/page';
 
-export interface PageDto extends PageAttributes {}
+export interface PageDto extends PageAttributes {
+  ownerIdGroup?: number;
+}

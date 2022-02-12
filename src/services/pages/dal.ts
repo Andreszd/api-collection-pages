@@ -1,4 +1,5 @@
-import { Filter } from '../../enums/Filters';
+import { QueryTypes } from 'sequelize';
+import sequelizeConnection from '../../db/db.config';
 import { NotFoundException } from '../../Exceptions/NotFoundException';
 import Page, { PageAttributes } from '../../models/page';
 import { PageDto } from '../pages/dto';
@@ -46,4 +47,17 @@ export const remove = async (id: number): Promise<void> => {
   const page = await getById(id);
   if (!page) throw new NotFoundException('Page');
   return page.destroy();
+};
+
+export const filterPagesNotOwnerByIdGroup = async (
+  idsPage: number[],
+  id: number
+): Promise<Page[]> => {
+  return sequelizeConnection.query(
+    'SELECT "Pages".* FROM "Pages","Groups" WHERE "Pages".id IN(:ids) AND "Pages"."ownerIdGroup" != :id GROUP BY "Pages".id',
+    {
+      replacements: { id, ids: idsPage },
+      type: QueryTypes.SELECT,
+    }
+  );
 };

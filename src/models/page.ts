@@ -1,4 +1,5 @@
 import { Optional, Model, DataTypes } from 'sequelize';
+import Group from './group';
 import { getDefaultModelBaseOpt, ModelBase } from './modelBase';
 
 export interface PageAttributes extends ModelBase {

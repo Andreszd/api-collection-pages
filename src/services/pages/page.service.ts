@@ -32,6 +32,21 @@ export const getAllByChecked = async (isChecked: boolean): Promise<Page[]> => {
   return dal.findAllBy(Filter.CHECKED, isChecked);
 };
 
+export const getAllByIds = (ids: number[]): Promise<Page[]> => {
+  return dal.findAllBy('id', ids);
+};
+
+export const getAllByIdGroup = (idGroup: number): Promise<Page[]> => {
+  return dal.findAllBy('ownerIdGroup', idGroup);
+};
+
+export const getPagesNotOwnerByIdGroup = (
+  ids: number[],
+  idOwnerGroup: number
+): Promise<Page[]> => {
+  return dal.filterPagesNotOwnerByIdGroup(ids, idOwnerGroup);
+};
+
 export const updateAttr = (
   id: number,
   pageDto: Partial<PageDto>

@@ -8,12 +8,13 @@ import {
 import { getDefaultModelBaseOpt, ModelBase } from './modelBase';
 import Page from './page';
 
-interface GroupAttributes extends ModelBase {
+export interface GroupAttributes extends ModelBase {
   ownerId: number;
   name: string;
 }
 
-interface GroupCreationAttr extends Optional<GroupAttributes, 'name'> {}
+export interface GroupCreationAttr
+  extends Optional<GroupAttributes, 'id' | 'name'> {}
 
 class Group
   extends Model<GroupAttributes, GroupCreationAttr>
