@@ -45,3 +45,7 @@ export const patch = async (
   }
   return dal.patch(id, groupInput);
 };
+
+export const remove = (id: number): Promise<void> => {
+  return dal.remove(id);
+};

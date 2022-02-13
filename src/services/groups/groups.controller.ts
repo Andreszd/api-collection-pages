@@ -54,3 +54,16 @@ export const patch = async (
     return next(error);
   }
 };
+
+export const remove = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = req.params.id;
+  try {
+    await service.remove(parseInt(id));
+  } catch (error) {
+    next(error);
+  }
+};

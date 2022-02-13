@@ -22,3 +22,9 @@ export const patch = async (
   }
   return group.update(groupInput);
 };
+
+export const remove = async (id: number): Promise<void> => {
+  const group = await getById(id);
+  if (!group) throw new NotFoundException(`Group with id : ${id}`);
+  return group?.destroy();
+};
