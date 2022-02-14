@@ -6,7 +6,6 @@ import Group from '../models/group';
 export async function testConnection(): Promise<String> {
   try {
     await sequelizeConnection.authenticate();
-    console.log('>>>>> succesfully');
     return 'connection to db succesfully';
   } catch (error) {
     console.error('Unable to connect to the database', error);

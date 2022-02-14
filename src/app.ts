@@ -7,3 +7,7 @@ import { initModels, testConnection } from './db/init';
 app.mount();
 testConnection();
 initModels();
+
+const serverInstace = app.serverI;
+
+export { serverInstace };

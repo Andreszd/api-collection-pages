@@ -2,9 +2,11 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import routes from './routes';
 import { handleErrors } from './middlewares/handleErrors';
+import { Server } from 'http';
 
-class Server {
+class ServerConfig {
   private app: Application;
+  serverI!: Server;
   private port: number;
 
   public constructor(port: number) {
@@ -29,16 +31,19 @@ class Server {
     this.app.use(handleErrors);
   }
 
-  public mount(): void {
+  public mount(): Server | null {
     try {
       const port = process.env.PORT || this.port;
-      console.log('>>>', port);
-      this.app.listen(port, () => `Server running on port ${port}`);
+      this.serverI = this.app.listen(
+        port,
+        () => `Server running on port ${port}`
+      );
     } catch (error: any) {
       //TODO search type required for error param
       console.log(`Error ocurred: ${error.message}`);
     }
+    return null;
   }
 }
 //This code will be execute 1 time ?
-export const app = new Server(4000);
+export const app = new ServerConfig(4000);

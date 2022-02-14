@@ -9,7 +9,7 @@ import { toUserDto } from '../auth/mapper';
 
 export const create = async (user: UserDto): Promise<UserDto | null> => {
   const findedUser = await dal.findBy(user.email);
-  if (findedUser) throw new AttributeDuplicateError('username');
+  if (findedUser) throw new AttributeDuplicateError('email');
   return dal.create(user);
 };
 
