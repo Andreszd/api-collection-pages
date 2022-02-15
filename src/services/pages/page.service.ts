@@ -16,8 +16,10 @@ export const getAll = (): Promise<Page[]> => {
   return dal.getAll();
 };
 
-export const getById = async (id: number): Promise<Page | null> => {
-  return dal.getById(id);
+export const getById = async (id: number): Promise<Page> => {
+  const page = await dal.getById(id);
+  if (!page) throw new NotFoundException('Page');
+  return page;
 };
 
 export const getByIdOwner = (id: number): Promise<Page[]> => {
@@ -54,6 +56,6 @@ export const updateAttr = (
   return dal.update(id, pageDto);
 };
 
-export const remove = (id: number) => {
+export const remove = (id: number): Promise<void> => {
   return dal.remove(id);
 };

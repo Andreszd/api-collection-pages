@@ -61,6 +61,8 @@ describe.skip('endpoints user', () => {
 
   afterEach(async () => {
     await downServer(server);
-    sequelizeConnection.close();
+  });
+  afterAll(async () => {
+    await sequelizeConnection.close();
   });
 });

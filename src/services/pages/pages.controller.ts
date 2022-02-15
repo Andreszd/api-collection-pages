@@ -32,13 +32,21 @@ export const getAll = async (req: Request, res: Response) => {
   });
 };
 
-export const getById = async (req: Request, res: Response) => {
+export const getById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const id = req.params.id;
-  const page = await service.getById(parseInt(id));
-  return res.status(HttpStatusCode.OK).json({
-    response: 'successfull',
-    data: page,
-  });
+  try {
+    const page = await service.getById(parseInt(id));
+    return res.status(HttpStatusCode.OK).json({
+      response: 'successfull',
+      data: page,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const getByIdOwner = async (req: Request, res: Response) => {
@@ -96,13 +104,18 @@ export const updateAttr = async (
   }
 };
 
-export const remove = async (req: Request, res: Response, next: NextFunction) => {
-  const id =  req.params.id
+export const remove = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = req.params.id;
   try {
-    await service.remove(parseInt(id))   
-    res.status(HttpStatusCode.OK)
+    await service.remove(parseInt(id));
+    res.status(HttpStatusCode.OK).json({
+      response: 'successfully',
+    });
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
-

@@ -3,6 +3,7 @@ import * as controller from './pages.controller';
 
 const page = Router();
 
+page.get('/', controller.getAll);
 page.get('/:id', controller.getById);
 page.get('/:idOwner', controller.getByIdOwner);
 page.post('/', controller.create);
