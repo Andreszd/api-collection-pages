@@ -1,15 +1,12 @@
 import { Router } from 'express';
-import { validationFieldsUser } from '../../middlewares/validationFieldsUser';
+import { validationFieldsUserRegister } from '../../middlewares/validationFieldsUser';
+import { signIn } from './auth.controller';
 import { create } from '../users/users.controller';
 
 const auth = Router();
 
-auth.post('/signIn', () => {});
+auth.post('/signIn', signIn);
 
-auth.post(
-  '/signUp',
-  validationFieldsUser,
-  create
-);
+auth.post('/signUp', validationFieldsUserRegister, create);
 
 export default auth;

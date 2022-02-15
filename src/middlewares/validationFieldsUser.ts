@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { HttpStatusCode } from '../enums/HttpStatusCode';
 import { BaseError } from '../Exceptions/BaseError';
 
-export const validationFieldsUser = (
+export const validationFieldsUserRegister = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -19,4 +19,24 @@ export const validationFieldsUser = (
 
   message = 'all fields must be completed';
   return next(new BaseError(HttpStatusCode.INTERNAL_SERVER_ERROR, message));
+};
+
+export const validationFieldsUserSignIN = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, password } = req.body;
+  try {
+    if (!password || !email) {
+      throw new BaseError(
+        HttpStatusCode.BAD_REQUEST,
+        'All fields must be complete'
+      );
+    } else {
+      next();
+    }
+  } catch (error) {
+    next(error);
+  }
 };

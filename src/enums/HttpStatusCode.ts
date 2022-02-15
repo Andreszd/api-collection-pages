@@ -17,6 +17,12 @@ export enum HttpStatusCode {
    * The request might or might not be eventually acted upon, and may be disallowed when processing occurs.
    */
   ACCEPTED = 202,
+
+  BAD_REQUEST = 400,
+
+  UNAUTHORIZED = 401,
+
+  NOT_FOUND = 404,
   /*
    * A generic error message, given when an unexpected condition was encountered and no more specific message is suitable.
    */
@@ -27,8 +33,6 @@ export enum HttpStatusCode {
    * Usually this implies future availability (e.g., a new feature of a web-service API).
    */
   NOT_IMPLEMENTED = 501,
-
-  NOT_FOUND = 404,
 
   /**
    * The server was acting as a gateway or proxy and received an invalid response from the upstream server.

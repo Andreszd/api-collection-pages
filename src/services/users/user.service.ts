@@ -29,6 +29,12 @@ export const getAllById = async (id: number): Promise<UserDto> => {
   return dtoUser;
 };
 
+export const findBy = async (param: string): Promise<User> => {
+  const user = await dal.findBy(param);
+  if (!user) throw new NotFoundException(`User with ${param}`);
+  return user;
+};
+
 export const update = () => {};
 
 export const remove = () => {};

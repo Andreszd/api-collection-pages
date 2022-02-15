@@ -1,7 +1,7 @@
 import { Dialect, Sequelize } from 'sequelize';
 
 const dbName =
-  process.env.NODE_ENV === 'development'
+  process.env.NODE_ENV === 'test'
     ? (process.env.DB_TEST_NAME as string)
     : (process.env.DB_NAME as string);
 const dbUser = process.env.DB_USER as string;
