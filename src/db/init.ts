@@ -2,24 +2,22 @@ import User from '../models/user';
 import sequelizeConnection from './db.config';
 import Page from '../models/page';
 import Group from '../models/group';
+import { Model } from 'sequelize';
 
-export async function testConnection(): Promise<String> {
+const isDev = process.env.NODE_ENV === 'development';
+
+export async function testConnection(): Promise<void> {
   try {
     await sequelizeConnection.authenticate();
-    return 'connection to db succesfully';
-  } catch (error) {
+    console.log('connect to db successfully');
+  } catch (error: any) {
     console.error('Unable to connect to the database', error);
-    return 'Unable to connect to the database';
   }
 }
-export function initModels(): void {
-  const isDev = process.env.NODE_ENV === 'development';
-  try {
-    Group.sync({ alter: isDev });
-    User.sync({ alter: isDev });
-    Page.sync({ alter: isDev });
-    console.log('models created');
-  } catch (error) {
-    console.log('has ocurred a exception', error);
-  }
+export function initModels(): Promise<Model[]> {
+  return Promise.all([
+    Group.sync({ alter: isDev }),
+    User.sync({ alter: isDev }),
+    Page.sync({ alter: isDev }),
+  ]);
 }

@@ -1,13 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { app } from './server';
+import app from './server';
 import { initModels, testConnection } from './db/init';
 
-app.mount();
 testConnection();
 initModels();
+app.mount();
 
-const serverInstace = app.serverI;
-
-export { serverInstace };
+export default app;

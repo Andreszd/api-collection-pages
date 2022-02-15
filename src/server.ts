@@ -6,7 +6,7 @@ import { Server } from 'http';
 
 class ServerConfig {
   private app: Application;
-  serverI!: Server;
+  private serverConnection!: Server;
   private port: number;
 
   public constructor(port: number) {
@@ -34,16 +34,21 @@ class ServerConfig {
   public mount(): Server | null {
     try {
       const port = process.env.PORT || this.port;
-      this.serverI = this.app.listen(
+      this.serverConnection = this.app.listen(
         port,
         () => `Server running on port ${port}`
       );
     } catch (error: any) {
-      //TODO search type required for error param
       console.log(`Error ocurred: ${error.message}`);
     }
     return null;
   }
+
+  public getServerConnection(): Server {
+    return this.serverConnection;
+  }
 }
-//This code will be execute 1 time ?
-export const app = new ServerConfig(4000);
+
+const server = new ServerConfig(4000);
+
+export default server;
