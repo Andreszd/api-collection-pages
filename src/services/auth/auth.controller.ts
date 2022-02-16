@@ -30,7 +30,9 @@ export const signIn = async (
       firstName,
     };
 
-    const token = jwt.sign(userForToken, process.env.SECRET_KEY as string);
+    const token = jwt.sign(userForToken, process.env.SECRET_KEY as string, {
+      expiresIn: 60 * 60,
+    });
 
     res.status(200).json({
       id,
