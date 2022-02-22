@@ -5,6 +5,12 @@ export interface UserDto extends UserAttributes {
   pages?: Page[];
 }
 
+export type ResponseUserDto = {
+  id: number;
+  email: string;
+  fullName: string;
+};
+
 export type UserLogin = {
   email: string;
   password: string;

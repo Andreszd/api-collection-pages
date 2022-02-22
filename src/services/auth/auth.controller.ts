@@ -14,7 +14,8 @@ export const signIn = async (
 ) => {
   const userInput: UserLogin = req.body;
   try {
-    const { id, email, firstName, password } = await findBy(userInput.email);
+    console.log(userInput);
+    const { id, email, fullName, password } = await findBy(userInput.email);
     const match = await matchPasswords(userInput.password, password);
 
     if (!match) {
@@ -27,7 +28,7 @@ export const signIn = async (
     const userForToken = {
       id,
       email,
-      firstName,
+      fullName,
     };
 
     const token = jwt.sign(userForToken, process.env.SECRET_KEY as string, {

@@ -1,13 +1,15 @@
 import User from '../../models/user';
 import { AttributeDuplicateError } from '../../Exceptions/AttributeDuplicated';
-import { UserDto } from '../auth/dto';
+import { UserDto, ResponseUserDto } from '../auth/dto';
 
 import * as dal from '../users/dal';
 import { getByIdOwner } from '../pages/page.service';
 import { NotFoundException } from '../../Exceptions/NotFoundException';
 import { toUserDto } from '../auth/mapper';
 
-export const create = async (user: UserDto): Promise<UserDto | null> => {
+export const create = async (
+  user: UserDto
+): Promise<ResponseUserDto | null> => {
   const findedUser = await dal.findBy(user.email);
   if (findedUser) throw new AttributeDuplicateError('email');
   return dal.create(user);

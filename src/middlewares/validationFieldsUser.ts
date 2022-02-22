@@ -7,8 +7,8 @@ export const validationFieldsUserRegister = (
   res: Response,
   next: NextFunction
 ) => {
-  const { email, firstName, lastName, password } = req.body;
-  const fields = [email, firstName, lastName, password];
+  const { email, fullName, password } = req.body;
+  const fields = [email, fullName, password];
   const hasAllFieldsCompleted = fields.every(
     (value) => value !== undefined && value !== null
   );

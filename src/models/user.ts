@@ -13,8 +13,7 @@ import { encryptPasswd } from '../helpers/encryptPasswd';
 
 export interface UserAttributes extends ModelBase {
   email: string;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   password: string;
   urlImg?: string;
 }
@@ -28,8 +27,7 @@ class User
 {
   public id!: number;
   public email!: string;
-  public firstName!: string;
-  public lastName!: string;
+  public fullName!: string;
   public password!: string;
   public urlImg!: string;
 
@@ -60,11 +58,7 @@ const initAttr = {
     unique: true,
     allowNull: false,
   },
-  firstName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  lastName: {
+  fullName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
