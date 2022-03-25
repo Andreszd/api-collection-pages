@@ -28,5 +28,12 @@ export const getById = async (id: number): Promise<User> => {
   return user;
 };
 
-export const update = () => {};
+export const patch = async (
+  id: number,
+  attr: Partial<UserDto>
+): Promise<User> => {
+  const user = await getById(id);
+  return user.update(attr);
+};
+
 export const remove = () => {};

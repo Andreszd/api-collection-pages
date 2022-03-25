@@ -37,6 +37,10 @@ export const findBy = async (param: string): Promise<User> => {
   return user;
 };
 
+export const patch = (id: number, attr: Partial<UserDto>): Promise<User> => {
+  return dal.patch(id, attr);
+};
+
 export const update = () => {};
 
 export const remove = () => {};

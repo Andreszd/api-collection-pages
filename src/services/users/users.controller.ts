@@ -1,15 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { HttpStatusCode } from '../../enums/HttpStatusCode';
-import { UserDto } from '../auth/dto';
 import { toUserDto } from '../auth/mapper';
 import * as service from './user.service';
-
-/*
-export const create = async (user: UserDto): Promise<UserDto> => {
-  const createdUser = await service.create(user);
-  return toUserDto(createdUser);
-};
-*/
 
 export const getAll = async (req: Request, res: Response) => {
   const users = await service.getAll();
@@ -41,6 +33,24 @@ export const create = async (
     return res.status(HttpStatusCode.CREATED).json({
       response: 'successfull',
       data: userCreated,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const updateAttr = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  const attr = req.body;
+  try {
+    const updatedUser = await service.patch(parseInt(id), attr);
+    return res.status(HttpStatusCode.OK).json({
+      response: 'successfully',
+      data: updatedUser,
     });
   } catch (error) {
     return next(error);
