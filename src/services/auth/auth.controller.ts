@@ -37,6 +37,7 @@ export const signIn = async (
 
     res.status(200).json({
       id,
+      fullName,
       email,
       token,
     });

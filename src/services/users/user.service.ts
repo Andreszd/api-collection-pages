@@ -4,6 +4,7 @@ import { UserDto, ResponseUserDto } from '../auth/dto';
 
 import * as dal from '../users/dal';
 import { getByIdOwner } from '../pages/page.service';
+import { removeImage } from '../images/images.service';
 import { NotFoundException } from '../../Exceptions/NotFoundException';
 import { toUserDto } from '../auth/mapper';
 
@@ -39,6 +40,15 @@ export const findBy = async (param: string): Promise<User> => {
 
 export const patch = (id: number, attr: Partial<UserDto>): Promise<User> => {
   return dal.patch(id, attr);
+};
+
+export const updateProfile = async (
+  id: number,
+  urlImg: string
+): Promise<User> => {
+  const user = await getById(id);
+  removeImage(user.urlImg);
+  return patch(id, { urlImg });
 };
 
 export const update = () => {};
